@@ -1,0 +1,28 @@
+{
+    "db_location": "sqlite:////home/tim/VECMA-hackathon/conduction_uq_runs/Conduction.j1nqd3tc/campaign.db",
+    "db_type": "sql",
+    "active_app": "1D_conduction",
+    "campaign_name": "Conduction.",
+    "campaign_dir": "Conduction.j1nqd3tc",
+    "log": [
+        {
+            "element": {
+                "name": "PCE_sampler",
+                "version": "0.6",
+                "category": "sampling"
+            },
+            "info": {
+                "num_added": 16,
+                "replicas": 1
+            }
+        },
+        {
+            "element": {
+                "name": "PCE_Analysis",
+                "version": "0.6",
+                "category": "analysis"
+            },
+            "info": null
+        }
+    ]
+}

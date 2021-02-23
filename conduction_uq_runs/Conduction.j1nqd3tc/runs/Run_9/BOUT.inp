@@ -1,0 +1,40 @@
+#
+# Input file for conduction case
+#
+
+nout = 100       # Number of output timesteps
+timestep = 0.1  # Time between outputs
+
+MXG = 0 # No X communications
+
+##################################################
+[mesh]  # Geometry of the mesh
+
+nx = 1
+ny = 100
+nz = 1
+
+dy = 0.2
+
+# Puts the boundaries half a step outside the last gridpoints
+symmetricGlobalY = true
+
+# These flags make the y-direction non-periodic
+ixseps1 = -1
+ixseps2 = -1
+
+##################################################
+[conduction]  # Settings for the conduction model
+
+chi = 59.57656741740155
+
+##################################################
+[T] # Settings for the T variable
+
+scale = 0.5694318442029738  # Size of the initial perturbation
+gauss_width = 0.2
+gauss_centre = 3.141592653589793
+function = gauss(y - gauss_centre, gauss_width)  # The form of the initial perturbation. y from 0 to 2*pi
+
+# Set the value on the boundaries to 0 (4th order extrapolation to ghostpoint)
+bndry_all = dirichlet_o4(0.0)

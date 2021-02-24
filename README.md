@@ -7,7 +7,7 @@ quantification using the VECMA toolkit.
 Git submodules are used to bring in external dependencies. Please clone with either
 
 ~~~
-git clone --recursive git@github.com:boutproject/VECMA-hackathon.git
+git clone --recursive git@github.com:tjdodwell/VECMA-hackathon.git
 ~~~
 
 or run

@@ -7,10 +7,14 @@ import os
 import numpy as np
 import time
 import matplotlib.pyplot as plt
+import pandas as pd
 
 campaign = uq.Campaign(name="Conduction.")
 encoder = boutvecma.BOUTEncoder(template_input="../models/conduction/data/BOUT.inp")
 decoder = boutvecma.SimpleBOUTDecoder(variables=["T"])
+
+#decoder = uq.decoders.SimpleCSV(target_filename="output.csv",output_columns=["T"])
+
 params = {
     "conduction:chi": {"type": "float", "min": 0.0, "max": 1e3, "default": 1.0},
     "T:scale": {"type": "float", "min": 0.0, "max": 1e3, "default": 1.0},
@@ -24,6 +28,11 @@ vary = {
     "conduction:chi": chaospy.LogUniform(np.log(1e-2), np.log(1e2)),
     "T:scale": chaospy.Uniform(0.5, 1.5),
 }
+
+#id = campaign.campaign_db.get_campaign_id("Conduction.")
+
+#print("This is the campaign id = " + str(id))
+
 
 sampler = uq.sampling.PCESampler(vary=vary, polynomial_order=3)
 campaign.set_sampler(sampler)
@@ -43,6 +52,11 @@ time_end = time.time()
 print(f"Finished, took {time_end - time_start}")
 
 campaign.collate()
+
+print(campaign.campaign_db.get_results(campaign._active_app['name'], campaign._active_sampler_id))
+
+
+#df.to_csv("output.csv")
 
 campaign.apply_analysis(uq.analysis.PCEAnalysis(sampler=sampler, qoi_cols=["T"]))
 

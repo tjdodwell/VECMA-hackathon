@@ -35,6 +35,9 @@ vary = {
 
 
 sampler = uq.sampling.PCESampler(vary=vary, polynomial_order=3)
+
+samplerNew = uq.sampling.CSVSampler(filename = "test_data1.csv")
+
 campaign.set_sampler(sampler)
 
 campaign.draw_samples()
